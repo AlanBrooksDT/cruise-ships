@@ -1,0 +1,22 @@
+{
+  "name": "cruise-ships",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlanBrooksDT/cruise-ships.git"
+  },
+  "author": "Alan Brooks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlanBrooksDT/cruise-ships/issues"
+  },
+  "homepage": "https://github.com/AlanBrooksDT/cruise-ships#readme",
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
+}
