@@ -12,3 +12,10 @@ describe('check if properties returning', () => {
         expect(ship.startingPort).toBe("Southampton");
     });
 });
+describe('set the passenger to sail from port', () => {
+    test('identify port sailing from', () => {
+        const ship = new Ship("Dover");
+        ship.setSail();
+        expect(ship.startingPort).toBeFalsy();
+    })
+})
