@@ -26,7 +26,8 @@ describe('test to see if ship is able to dock at new port', () => {
     test('dock at new port', () => {
         const fromPort = new Port("Dover");
         const ship = new Ship(fromPort);
-        ship.shipDock("Calais");
-        expect(ship.currentPort).toBe("Calais");
-    })
-})
+        const toPort = new Port("Calais");
+        ship.shipDock(toPort);
+        expect(ship.currentPort).toBe(toPort);
+    });
+});
