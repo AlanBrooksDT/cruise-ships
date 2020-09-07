@@ -21,18 +21,20 @@ describe('check if properties returning', () => {
 });
 describe('test functionality of the setSail method', () => {
     test('identify port sailing from', () => {
-        const port = new Port("Dover");
-        const itinerary = new Itinerary([port]);
+        const fromPort = new Port("Dover");
+        const toPort = new Port("Calais");
+        const itinerary = new Itinerary([fromPort, toPort]);
         const ship = new Ship(itinerary);
         ship.setSail();
         expect(ship.currentPort).toBeFalsy();
     });
     test('set previousPort property to current port', () => {
-        const port = new Port("Dover");
-        const itinerary = new Itinerary([port]);
+        const fromPort = new Port("Dover");
+        const toPort = new Port("Calais");
+        const itinerary = new Itinerary([fromPort, toPort]);
         const ship = new Ship(itinerary);
         ship.setSail();
-        expect(ship.previousPort).toBe(port);
+        expect(ship.previousPort).toBe(fromPort);
     });
 });
 describe('test to see if ship is able to dock at new port', () => {
@@ -54,3 +56,14 @@ describe('test for properties existing within new ship object', () => {
         expect(ship).toHaveProperty('previousPort', null);
     });
 });
+describe('cannot sail further than the last point in the itinerary', () => {
+    test('throws an error if try to sail futher', () => {
+        const fromPort = new Port("Dover");
+        const toPort = new Port("Calais");
+        const itinerary = new Itinerary([fromPort, toPort]);
+        const ship = new Ship(itinerary);
+        ship.setSail();
+        ship.shipDock();
+        expect(() => ship.setSail()).toThrowError('End of itinerary reached');
+    });
+})
