@@ -27,6 +27,7 @@ describe('test functionality of the setSail method', () => {
         const ship = new Ship(itinerary);
         ship.setSail();
         expect(ship.currentPort).toBeFalsy();
+        expect(fromPort.shipsInPort).not.toContain(ship);
     });
     test('set previousPort property to current port', () => {
         const fromPort = new Port("Dover");
@@ -46,6 +47,7 @@ describe('test to see if ship is able to dock at new port', () => {
         ship.setSail();
         ship.shipDock();
         expect(ship.currentPort).toBe(toPort);
+        expect(toPort.shipsInPort).toContain(ship);
     });
 });
 describe('test for properties existing within new ship object', () => {
@@ -66,4 +68,12 @@ describe('cannot sail further than the last point in the itinerary', () => {
         ship.shipDock();
         expect(() => ship.setSail()).toThrowError('End of itinerary reached');
     });
+});
+describe('ship gets added to port on creation', () => {
+    test('add ship name to starting port at ship creation', () => {
+        const port = new Port("Southampton");
+        const itinerary = new Itinerary([port]);
+        const ship = new Ship(itinerary);
+        expect(port.shipsInPort).toContain(ship);
+    })
 })
