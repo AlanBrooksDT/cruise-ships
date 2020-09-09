@@ -28,45 +28,38 @@ describe('Ship constructor', () => {
     });
   });  
 });
-describe('test functionality of the setSail method', () => {
+describe('multiples ports initialised', () => {
+    describe('test functionality of the setSail method', () => {
+        let dover;
+        let calais; 
+        let itinerary;
+        let ship;
+
+        beforeEach(() => {
+            dover = new Port("Dover");
+            calais = new Port("Calais");
+            itinerary = new Itinerary([dover, calais]);
+            ship = new Ship(itinerary);
+    });
     test('identify port sailing from', () => {
-        const dover = new Port("Dover");
-        const calais = new Port("Calais");
-        const itinerary = new Itinerary([dover, calais]);
-        const ship = new Ship(itinerary);
         ship.setSail();
         expect(ship.currentPort).toBeFalsy();
         expect(dover.shipsInPort).not.toContain(ship);
     });
     test('set previousPort property to current port', () => {
-        const dover = new Port("Dover");
-        const calais = new Port("Calais");
-        const itinerary = new Itinerary([dover, calais]);
-        const ship = new Ship(itinerary);
         ship.setSail();
         expect(ship.previousPort).toBe(dover);
     });
-});
-describe('test to see if ship is able to dock at new port', () => {
-    test('dock at new port', () => {
-        const dover = new Port("Dover");
-        const calais = new Port("Calais");
-        const itinerary = new Itinerary([dover, calais]);
-        const ship = new Ship(itinerary);
+    test('test to see if ship is able to dock at new port', () => {
         ship.setSail();
         ship.shipDock();
         expect(ship.currentPort).toBe(calais);
         expect(calais.shipsInPort).toContain(ship);
     });
-});
-describe('cannot sail further than the last point in the itinerary', () => {
-    test('throws an error if try to sail futher', () => {
-        const dover = new Port("Dover");
-        const calais = new Port("Calais");
-        const itinerary = new Itinerary([dover, calais]);
-        const ship = new Ship(itinerary);
+    test('throws an error if try to sail futher than last itinerary port', () => {
         ship.setSail();
         ship.shipDock();
         expect(() => ship.setSail()).toThrowError('End of itinerary reached');
+    });
     });
 });
