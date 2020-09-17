@@ -1,5 +1,4 @@
 const Port = require('../src/port');
-const Ship = require('../src/cruise-ship');
 
 describe('port constructor', () => {
   describe('ports and ships', () =>{
@@ -10,9 +9,9 @@ describe('port constructor', () => {
 
       beforeEach(() => {
         port = new Port('Dover');
-        maryCeleste = {};
-        titanic = {};
-        ship = {};
+        maryCeleste = jest.fn();
+        titanic = jest.fn();
+        ship = jest.fn();
       });
     test('new instance of port returns an object', () => {
         expect(new Port()).toBeInstanceOf(Object);
@@ -20,7 +19,7 @@ describe('port constructor', () => {
     test('new port contains a name property', () => {
         expect(new Port()).toHaveProperty('name');
     });
-    test('add ship to the port', () => {
+    test('can add ship to the port', () => {
         port.addShip(ship);
         expect(port.shipsInPort).toContain(ship);
     });
