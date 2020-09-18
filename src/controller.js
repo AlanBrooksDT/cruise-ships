@@ -6,13 +6,13 @@ class Controller {
     }
 
 initialiseSea() {
-    const backgrounds = ["./images/water0.png", "./images/water1.png"];
+    const backgrounds = ['./images/water0.png', './images/water1.png',];
     let backgroundIndex = 0;
 
     window.setInterval(() => {
-        document.querySelector("#viewport").getElementsByClassName.backgroundImage = 'url(${backgrounds[backgroundIndex % backgrounds.length]})';
-        backgroundIndex += 1;
-    }, 1000);
+        document.querySelector('#viewport').style.backgroundImage = `url('${backgrounds[backgroundIndex % backgrounds.length]}')`;
+  backgroundIndex += 1;
+}, 1000);
 };
 renderPorts(ports){
     const portsElement = document.querySelector('#ports');
@@ -30,6 +30,13 @@ renderPorts(ports){
         portsElement.style.width = `${portsElementWidth + 256}px`;
       })
 };
+renderShip(ship) {
+    const shipPortIndex = ship.itinerary.ports.indexOf(ship.currentPort);
+    const portElement = document.querySelector(`[data-port-index='${shipPortIndex}']`);
+    const shipElement = document.querySelector('#ship');
+    shipElement.style.top = `${portElement.offsetTop + 32}px`;
+    shipElement.style.left = `${portElement.offsetLeft - 32}px`;
+}
 };
 if(typeof module !== 'undefined' && module.exports) {
     module.exports = Controller;
